@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7746E5EC-034C-4487-8279-CF2484A6F9CD}</ProjectGuid>
+    <ProjectGuid>{A87D40B7-5269-464C-95A6-C9B990C990FA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SHES</RootNamespace>
-    <AssemblyName>SHES</AssemblyName>
+    <RootNamespace>SolarniPaneli</RootNamespace>
+    <AssemblyName>SolarniPaneli</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculations.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
