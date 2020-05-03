@@ -11,6 +11,7 @@ namespace SHES
         static void Main(string[] args)
         {
             int I = 0;
+            int promjena;
         }
     }
 }
