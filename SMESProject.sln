@@ -5,10 +5,6 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHES", "SHES\SHES.csproj", "{7746E5EC-034C-4487-8279-CF2484A6F9CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarniPaneli", "SolarniPaneli\SolarniPaneli.csproj", "{A87D40B7-5269-464C-95A6-C9B990C990FA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService1", "WcfService1\WcfService1.csproj", "{1CA3F00F-706B-4A86-BFD5-F746CE82DF87}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{7746E5EC-034C-4487-8279-CF2484A6F9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7746E5EC-034C-4487-8279-CF2484A6F9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7746E5EC-034C-4487-8279-CF2484A6F9CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A87D40B7-5269-464C-95A6-C9B990C990FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A87D40B7-5269-464C-95A6-C9B990C990FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A87D40B7-5269-464C-95A6-C9B990C990FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A87D40B7-5269-464C-95A6-C9B990C990FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CA3F00F-706B-4A86-BFD5-F746CE82DF87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CA3F00F-706B-4A86-BFD5-F746CE82DF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CA3F00F-706B-4A86-BFD5-F746CE82DF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CA3F00F-706B-4A86-BFD5-F746CE82DF87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
