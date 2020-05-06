@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Komponente
 {
-    class SolarniPanel
+    public class SolarniPanel
     {
+        public string Ime { get; set; }
+        public int MaxSnaga { get; set; }
+
+        
+
     }
 }

@@ -13,6 +13,7 @@ namespace SHES
             int I = 0;
             int k = 0;
             int promjena;
+            int promjenaNova;
         }
     }
 }
