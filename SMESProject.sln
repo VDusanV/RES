@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHES", "SHES\SHES.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Komponente", "Komponente\Komponente.csproj", "{74566238-8488-4EAC-85E8-CA9EBF0F5A20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KomponenteUgovori", "KomponenteUgovori\KomponenteUgovori.csproj", "{2A23223F-DD0D-4165-8F00-B74B1683B0C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{74566238-8488-4EAC-85E8-CA9EBF0F5A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74566238-8488-4EAC-85E8-CA9EBF0F5A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74566238-8488-4EAC-85E8-CA9EBF0F5A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A23223F-DD0D-4165-8F00-B74B1683B0C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A23223F-DD0D-4165-8F00-B74B1683B0C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A23223F-DD0D-4165-8F00-B74B1683B0C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A23223F-DD0D-4165-8F00-B74B1683B0C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

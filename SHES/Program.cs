@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,10 +11,13 @@ namespace SHES
     {
         static void Main(string[] args)
         {
-            int I = 0;
-            int k = 0;
-            int promjena;
-            int promjenaNova;
+            Console.WriteLine("SERVER");
+            ServiceHost service = new ServiceHost(typeof(ImplementacijaPotrosaca));
+
+            service.Open();
+
+            Console.ReadLine();
+            service.Close();
         }
     }
 }
