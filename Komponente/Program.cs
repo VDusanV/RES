@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SHES
+namespace Komponente
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int I = 0;
-            int k = 0;
-            int promjena;
         }
     }
 }
