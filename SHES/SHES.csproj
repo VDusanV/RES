@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Calculations.cs" />
     <Compile Include="ImplementacijaPotrosaca.cs" />
+    <Compile Include="ImplementacijaSolarniPanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

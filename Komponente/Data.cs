@@ -8,6 +8,8 @@ namespace Komponente
 {
     public class Data
     {
+        public static double snagaSunca = 0; //snaga sunca u procentima
         public static Dictionary<string, Potrosac> potrosaci;
+        public static Dictionary<string, SolarniPanel> solarniPaneli;
     }
 }

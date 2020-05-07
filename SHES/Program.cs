@@ -13,11 +13,14 @@ namespace SHES
         {
             Console.WriteLine("SERVER");
             ServiceHost service = new ServiceHost(typeof(ImplementacijaPotrosaca));
+            ServiceHost servicePanel = new ServiceHost(typeof(ImplementacijaSolarniPanel));
 
             service.Open();
+            servicePanel.Open();
 
             Console.ReadLine();
             service.Close();
+            servicePanel.Close();
         }
     }
 }
