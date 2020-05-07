@@ -11,7 +11,7 @@ namespace SHES
     {
         public double GetPotrosnjaPotrosaca(double potrosnjaPotrosaca)
         {
-            Console.WriteLine(potrosnjaPotrosaca);
+            Console.WriteLine("Ukupna potrosnja potrosaca je: " + potrosnjaPotrosaca);
             return 0;
         }
     }
