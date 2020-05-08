@@ -15,12 +15,13 @@ namespace Komponente
 
         static void Main(string[] args)
         {
+            //Default-ni solarni panel
             SolarniPanel sp1 = new SolarniPanel()
             {
                 Ime = "prvi",
                 MaxSnaga = 50
             };
-
+            //Default-ni potrosac
             Potrosac p1 = new Potrosac()
             {
                 JedinstvenoIme = "prvi",
@@ -67,48 +68,152 @@ namespace Komponente
         {
             while (true)
             {
-                Console.WriteLine("---------------------------------");
-                Console.WriteLine("Dodavanje novog potrosaca -> 1");
-                Console.WriteLine("Dodavanje novog solarnog panela -> 2");
-                Console.WriteLine("Unos snage sunca(%) -> 3");
+                //MENI
+                Console.WriteLine("\n~~~~~~~~~~~~~~~~~~~~~ MENI ~~~~~~~~~~~~~~~~~~~~~");
+                Console.WriteLine("------------------------------------------------");
+                Console.WriteLine("---- 1 -> Dodavanje novog potrosac          ----");
+                Console.WriteLine("---- 2 -> Dodavanje novog solarnog panela   ----");
+                Console.WriteLine("---- 3 -> Unos snage sunca(%)               ----");
+                Console.WriteLine("------------------------------------------------\n");
                 Console.WriteLine("Unesite vas izbor: ");
-                int izbor = Int32.Parse(Console.ReadLine());
-
-                switch (izbor)
+                try
                 {
-                    case 1:
-                        Potrosac p = new Potrosac() { };
-                        Console.WriteLine("Unesite jedinstveno ime potrosaca");
-                        p.JedinstvenoIme = Console.ReadLine();
-                        Console.WriteLine("Unesite potrosnju");
-                        p.Potrosnja = Int32.Parse(Console.ReadLine());
-                        lock (Data.potrosaci)
-                        {
-                            Data.potrosaci.Add(p.JedinstvenoIme, p);
-                        }
-                        break;
-                    case 2:
-                        SolarniPanel sp = new SolarniPanel() { };
-                        Console.WriteLine("Unesite ime solarnog panela: ");
-                        //pri dodavanju provjeriti da li to ime postoji vec //foreach kroz dictionary if->continue
-                        sp.Ime = Console.ReadLine();
-                        Console.WriteLine("Unesite maksimalnu snagu solarnog panela: ");
-                        sp.MaxSnaga = Int32.Parse(Console.ReadLine());
-                        lock (Data.solarniPaneli)
-                        {
-                            Data.solarniPaneli.Add(sp.Ime, sp);
-                        }
-                        break;
-                    case 3:  Console.WriteLine("Unesite snagu sunca u %: ");
-                             Data.snagaSunca = double.Parse(Console.ReadLine());
-                             break;
-                    default: Console.WriteLine("Unesite neku od ponudjenih opcija!");
-                             break;
+                    int izbor = Int32.Parse(Console.ReadLine());
+
+                    switch (izbor)
+                    {
+                 
+                        case 1:
+                            Potrosac p = new Potrosac() { };
+                            Console.WriteLine("Unesite jedinstveno ime potrosaca:");
+                            string ime = Console.ReadLine();
+                            if (!Data.potrosaci.ContainsKey(ime))
+                            {
+                                Console.WriteLine("Unesite potrosnju:");
+                                try
+                                {
+                                    p.Potrosnja = double.Parse(Console.ReadLine());
+                                    p.JedinstvenoIme = ime;
+                                }
+                                catch
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("-------------GRESKA------------",Console.ForegroundColor);
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine("Greska pri unosu potrosnje.");
+                                    break;
+                                }
+                                lock (Data.potrosaci)
+                                {
+                                    Data.potrosaci.Add(p.JedinstvenoIme, p);
+                                }
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("OPERACIJA NIJE USPELA, potrosac vec postoji.");
+                                break;
+                            }
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("-------OPERACIJA IZVRSENA--------");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+
+                        case 2:
+                            SolarniPanel sp = new SolarniPanel() { };
+                            Console.WriteLine("Unesite ime solarnog panela: ");
+                            string naziv = Console.ReadLine();
+                            if (!Data.solarniPaneli.ContainsKey(naziv))
+                            {
+                                Console.WriteLine("Unesite maksimalnu snagu solarnog panela: ");
+                                try
+                                {
+                                    sp.MaxSnaga = Int32.Parse(Console.ReadLine());
+                                    sp.Ime = naziv;
+                                }
+                                catch
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine("Greska pri unosu maksimalne snage solarnog panela.");
+                                    break;
+                                }
+                                lock (Data.solarniPaneli)
+                                {
+                                    Data.solarniPaneli.Add(sp.Ime, sp);
+                                }
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("OPERACIJA NIJE USPELA, solarni panel vec postoji.");
+                                break;
+                            }
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("-------OPERACIJA IZVRSENA--------");
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                            break;
+
+
+
+                        case 3:
+                            Console.WriteLine("Unesite snagu sunca u %: ");
+                            try
+                            {
+                                double snaga = double.Parse(Console.ReadLine());
+                                if (snaga >= 0 && snaga <= 100)
+                                {
+                                    Data.snagaSunca = snaga;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine("OPERACIJA NIJE USPELA, Opseg snage sunca je 0%-100%.");
+                                    break;
+                                }
+
+                            }
+                            catch
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("OPERACIJA NIJE USPELA, neispravan unos.");
+                                break;
+                            }
+
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("-------OPERACIJA IZVRSENA--------");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+
+
+
+
+                        default:
+                            Console.WriteLine("---------------------------------");
+                            Console.WriteLine("Unesite neku od ponudjenih opcija!");
+                                 break;
+
+                    }
 
                 }
+                catch
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("OPERACIJA NIJE USPELA, neispravan unos opcije menija.");                    
+                }
 
-
-                
             }
         }
         static void Slanje()
