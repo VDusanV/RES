@@ -6,7 +6,33 @@ using System.Threading.Tasks;
 
 namespace Komponente
 {
-    class PunjacElekAuto
+    public class PunjacElekAuto
     {
+        public int MaxSnagaBaterije { get; set; }
+        public bool AutoNaPunjacu { get; set; }
+        public int NapunjenostBaterije { get; set; }
+       // Definisati vreme kada se auto puni i to implementirati
+       // public DateTime VremePunjenja { get; set; }
+
+        public PunjacElekAuto()
+        {
+            MaxSnagaBaterije = 250;
+            AutoNaPunjacu = false;
+            NapunjenostBaterije = 0;
+        }
+        public PunjacElekAuto(int m)
+        {
+            MaxSnagaBaterije = m;
+            AutoNaPunjacu = false;
+            NapunjenostBaterije = 0;
+        }
+
+        public void UkljuciIskljuci()
+        {
+            if (AutoNaPunjacu)
+                AutoNaPunjacu = false;
+            else
+                AutoNaPunjacu = true;
+        }
     }
 }

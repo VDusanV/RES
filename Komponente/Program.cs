@@ -36,13 +36,30 @@ namespace Komponente
             Thread t1 = new Thread(Upis);
             Thread t2 = new Thread(Slanje);
             Thread t3 = new Thread(PosaljiUkupnuSnagu);
+            Thread t4 = new Thread(PosaljiUkupnuPotrosnjuPunjaca);
 
             t1.Start();
             t2.Start();
             t3.Start();
+            t4.Start();
             
         }
-        
+
+        private static void PosaljiUkupnuPotrosnjuPunjaca()
+        {
+            ChannelFactory<IPunjac> factoryPanel = new ChannelFactory<IPunjac>("ImplementacijaPunjaca");
+            IPunjac proxyPunjac = factoryPanel.CreateChannel();
+
+            while (true)
+            {
+                if (Data.PunjacEA.AutoNaPunjacu)
+                {
+                    proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
         static void PosaljiUkupnuSnagu()
         {
             ChannelFactory<ISolarniPanel> factoryPanel = new ChannelFactory<ISolarniPanel>("ImplementacijaSolarniPanel");
@@ -74,6 +91,7 @@ namespace Komponente
                 Console.WriteLine("---- 1 -> Dodavanje novog potrosac          ----");
                 Console.WriteLine("---- 2 -> Dodavanje novog solarnog panela   ----");
                 Console.WriteLine("---- 3 -> Unos snage sunca(%)               ----");
+                Console.WriteLine("---- 4 -> Elektricni automobil              ----");
                 Console.WriteLine("------------------------------------------------\n");
                 Console.WriteLine("Unesite vas izbor: ");
                 try
@@ -195,7 +213,10 @@ namespace Komponente
                             Console.ForegroundColor = ConsoleColor.White;
                             break;
 
-
+                        case 4:
+                            //Po defaultu je punjac iskljucen treba ga ukljuciti da bi slao podatke
+                            Elekauto();
+                            break;
 
 
                         default:
@@ -216,6 +237,50 @@ namespace Komponente
 
             }
         }
+        //Treba dodati proveru za sve opcije
+        private static void Elekauto()
+        {
+            while (true)
+            {
+                Console.WriteLine("\n~~~~~~~~~~~ ELEKTRICNI AUTOMOBIL ~~~~~~~~~~~~~");
+                Console.WriteLine("------------------------------------------------");
+                Console.WriteLine("---- 1 -> Trenutno stanje                   ----");
+                Console.WriteLine("---- 2 -> Ukljuci / Iskljuci                ----");
+                Console.WriteLine("---- 3 -> Promeni procenat napunjenosti     ----");
+                Console.WriteLine("---- 4 -> MENI                              ----");
+                Console.WriteLine("------------------------------------------------\n");
+                Console.WriteLine("Unesite vas izbor: ");
+                //dodati proveru
+                int izbor = Int32.Parse(Console.ReadLine());
+                if (izbor == 4)
+                {
+                    break;
+                }
+                switch (izbor)
+                {
+                    case 1:
+                        Console.WriteLine("---Trenutno stanje je---");
+                        Console.WriteLine("Max snaga: " + Data.PunjacEA.MaxSnagaBaterije);
+                        Console.WriteLine("Ukljucen/Iskljucen --> " + Data.PunjacEA.AutoNaPunjacu);
+                        Console.WriteLine("Procenat napunjenosti: " + Data.PunjacEA.NapunjenostBaterije);
+                        break;
+
+                    case 2:
+                        Data.PunjacEA.UkljuciIskljuci();
+                        Console.WriteLine("Stanje nakon izvresene metode Ukljuci/Iskljuci --> " + Data.PunjacEA.AutoNaPunjacu);
+
+                        break;
+                    case 3:
+                        Console.WriteLine("Unesite procenat (%) napunjenosti baterije");
+                        //treba dodati proveru
+                        int pro = Int32.Parse(Console.ReadLine());
+                        Data.PunjacEA.NapunjenostBaterije = pro;
+                        break;
+                }
+            }
+
+        }
+
         static void Slanje()
         {
             ChannelFactory<IPotrosac> factory = new ChannelFactory<IPotrosac>("ImplementacijaPotrosaca");
