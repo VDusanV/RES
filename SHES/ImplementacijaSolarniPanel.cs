@@ -11,7 +11,8 @@ namespace SHES
     {
         public void GetUkupnaSnaga(double ukupnaSnaga)
         {
-            Console.WriteLine("Ukupna snaga dobijena sa svih panela je: " + ukupnaSnaga);
+            Console.WriteLine("Ukupna snaga dobijena sa svih panela je----------" + ukupnaSnaga);
+
         }
     }
 }

@@ -11,7 +11,8 @@ namespace SHES
     {
         public void GetUkupnaPotrosnjaPunjaca(int ukupnaSnaga)
         {
-            Console.WriteLine("Ukupna potrosnja Punjaca je: " + ukupnaSnaga);
+            Console.WriteLine("Ukupna potrosnja Punjaca je----------------------" + ukupnaSnaga);
+
 
         }
     }

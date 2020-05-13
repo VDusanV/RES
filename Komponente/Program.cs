@@ -52,7 +52,7 @@ namespace Komponente
 
             while (true)
             {
-                if (Data.PunjacEA.AutoNaPunjacu)
+                if (Data.PunjacEA.AutoNaPunjacu && Data.PunjacEA.DaLiZelimoDaSePuni)
                 {
                     proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
                 }
@@ -115,10 +115,7 @@ namespace Komponente
                                 }
                                 catch
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("-------------GRESKA------------",Console.ForegroundColor);
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                    Console.WriteLine("Greska pri unosu potrosnje.");
+                                    Greska("Greska pri unosu potrosnje.");
                                     break;
                                 }
                                 lock (Data.potrosaci)
@@ -128,15 +125,10 @@ namespace Komponente
                             }
                             else
                             {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("OPERACIJA NIJE USPELA, potrosac vec postoji.");
+                                Greska("potrosac vec postoji.");
                                 break;
                             }
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("-------OPERACIJA IZVRSENA--------");
-                            Console.ForegroundColor = ConsoleColor.White;
+                            UspesnaOperacija();
                             break;
 
                         case 2:
@@ -153,10 +145,7 @@ namespace Komponente
                                 }
                                 catch
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                    Console.WriteLine("Greska pri unosu maksimalne snage solarnog panela.");
+                                    Greska("Greska pri unosu maksimalne snage solarnog panela.");
                                     break;
                                 }
                                 lock (Data.solarniPaneli)
@@ -166,15 +155,10 @@ namespace Komponente
                             }
                             else
                             {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("OPERACIJA NIJE USPELA, solarni panel vec postoji.");
+                                Greska("solarni panel vec postoji.");
                                 break;
                             }
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("-------OPERACIJA IZVRSENA--------");
-                            Console.ForegroundColor = ConsoleColor.White;
+                            UspesnaOperacija();
 
                             break;
 
@@ -191,26 +175,18 @@ namespace Komponente
                                 }
                                 else
                                 {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
-                                    Console.ForegroundColor = ConsoleColor.White;
-                                    Console.WriteLine("OPERACIJA NIJE USPELA, Opseg snage sunca je 0%-100%.");
+                                    Greska("Opseg snage sunca je 0%-100%.");
                                     break;
                                 }
 
                             }
                             catch
                             {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("OPERACIJA NIJE USPELA, neispravan unos.");
+                                Greska("neispravan unos.");
                                 break;
                             }
 
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("-------OPERACIJA IZVRSENA--------");
-                            Console.ForegroundColor = ConsoleColor.White;
+                            UspesnaOperacija();
                             break;
 
                         case 4:
@@ -229,15 +205,12 @@ namespace Komponente
                 }
                 catch
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("OPERACIJA NIJE USPELA, neispravan unos opcije menija.");                    
+                    Greska("unos opcije menija.");                 
                 }
 
             }
         }
-        //Treba dodati proveru za sve opcije
+        
         private static void Elekauto()
         {
             while (true)
@@ -250,32 +223,50 @@ namespace Komponente
                 Console.WriteLine("---- 4 -> MENI                              ----");
                 Console.WriteLine("------------------------------------------------\n");
                 Console.WriteLine("Unesite vas izbor: ");
-                //dodati proveru
-                int izbor = Int32.Parse(Console.ReadLine());
-                if (izbor == 4)
+              
+                try
                 {
-                    break;
+                    int izbor = Int32.Parse(Console.ReadLine());
+                    if (izbor == 4)
+                    {
+                        break;
+                    }
+                    switch (izbor)
+                    {
+                        case 1:
+                            Console.WriteLine("------Trenutno stanje je------");
+                            Console.WriteLine("---Max snaga:               " + Data.PunjacEA.MaxSnagaBaterije);
+                            Console.WriteLine("---Ukljucen/Iskljucen:      " + Data.PunjacEA.AutoNaPunjacu);
+                            Console.WriteLine("---Procenat napunjenosti:   " + Data.PunjacEA.NapunjenostBaterije);
+                            break;
+
+                        case 2:
+                            Data.PunjacEA.UkljuciIskljuci();
+                            Console.WriteLine("Stanje nakon izvresene metode Ukljuci/Iskljuci --> " + Data.PunjacEA.AutoNaPunjacu);
+                            UspesnaOperacija();
+                            break;
+                        case 3:
+                            Console.WriteLine("Unesite procenat (%) napunjenosti baterije");
+                            int pro = Int32.Parse(Console.ReadLine());
+                            if (pro >= 0 && pro <= 100)
+                            {
+                                Data.PunjacEA.NapunjenostBaterije = pro;
+                                UspesnaOperacija();
+                            }
+                            else
+                            {
+                                Greska("Greska pri unosu procenta.");
+                            }
+                            break;
+
+                        default:
+                            Console.WriteLine("Unesite komandu iz menija");
+                            break;
+                    }
                 }
-                switch (izbor)
+                catch
                 {
-                    case 1:
-                        Console.WriteLine("---Trenutno stanje je---");
-                        Console.WriteLine("Max snaga: " + Data.PunjacEA.MaxSnagaBaterije);
-                        Console.WriteLine("Ukljucen/Iskljucen --> " + Data.PunjacEA.AutoNaPunjacu);
-                        Console.WriteLine("Procenat napunjenosti: " + Data.PunjacEA.NapunjenostBaterije);
-                        break;
-
-                    case 2:
-                        Data.PunjacEA.UkljuciIskljuci();
-                        Console.WriteLine("Stanje nakon izvresene metode Ukljuci/Iskljuci --> " + Data.PunjacEA.AutoNaPunjacu);
-
-                        break;
-                    case 3:
-                        Console.WriteLine("Unesite procenat (%) napunjenosti baterije");
-                        //treba dodati proveru
-                        int pro = Int32.Parse(Console.ReadLine());
-                        Data.PunjacEA.NapunjenostBaterije = pro;
-                        break;
+                    Greska("neispravan unos.");
                 }
             }
 
@@ -298,6 +289,19 @@ namespace Komponente
                 proxyPotrosaci.GetPotrosnjaPotrosaca(potrosnja);
                 Thread.Sleep(1000);
             }
+        }
+        static void Greska(string s)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("-------------GRESKA------------", Console.ForegroundColor);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("OPERACIJA NIJE USPELA, "+s);
+        }
+        static void UspesnaOperacija()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("-------OPERACIJA IZVRSENA--------");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
