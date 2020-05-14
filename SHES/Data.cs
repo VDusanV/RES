@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SHES
 {
-    class Calculations
+    public class Data
     {
+        public static DateTime CentralnoVreme;
     }
 }

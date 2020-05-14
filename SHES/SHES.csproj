@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -44,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculations.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="ImplementacijaPotrosaca.cs" />
     <Compile Include="ImplementacijaPunjaca.cs" />
     <Compile Include="ImplementacijaSolarniPanel.cs" />

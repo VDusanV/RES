@@ -12,8 +12,9 @@ namespace Komponente
         public bool AutoNaPunjacu { get; set; }
         public bool DaLiZelimoDaSePuni { get; set; }
         public int NapunjenostBaterije { get; set; }
-       // Definisati vreme kada se auto puni i to implementirati
-       // public DateTime VremePunjenja { get; set; }
+     
+        public DateTime VremePunjenjaOd { get; set; }
+        public DateTime VremePunjenjaDo { get; set; }
 
         public PunjacElekAuto()
         {

@@ -52,6 +52,13 @@ namespace Komponente
 
             while (true)
             {
+                //Auto ce se ukljuciti na punjenje izmedju definisanog vremena bez obzira na sve
+                if(Data.vreme.Hour>=Data.PunjacEA.VremePunjenjaOd.Hour 
+                    || Data.vreme.Hour <= Data.PunjacEA.VremePunjenjaDo.Hour)
+                {
+                    proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
+
+                }
                 if (Data.PunjacEA.AutoNaPunjacu && Data.PunjacEA.DaLiZelimoDaSePuni)
                 {
                     proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
@@ -286,7 +293,10 @@ namespace Komponente
                         potrosnja += item.Value.Potrosnja;
                     }
                 }
-                proxyPotrosaci.GetPotrosnjaPotrosaca(potrosnja);
+                Data.vreme = proxyPotrosaci.GetPotrosnjaPotrosaca(potrosnja);
+               // Vreme se konstantno menja, odkomentarisi i pokreni
+               // Console.WriteLine(Data.vreme);
+
                 Thread.Sleep(1000);
             }
         }

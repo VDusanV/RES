@@ -9,12 +9,12 @@ namespace SHES
 {
     class ImplementacijaPotrosaca : IPotrosac
     {
-        public double GetPotrosnjaPotrosaca(double potrosnjaPotrosaca)
+        public DateTime GetPotrosnjaPotrosaca(double potrosnjaPotrosaca)
         {
             Console.WriteLine("Ukupna potrosnja potrosaca je--------------------" + potrosnjaPotrosaca);
 
 
-            return 0;
+            return Data.CentralnoVreme;
         }
     }
 }

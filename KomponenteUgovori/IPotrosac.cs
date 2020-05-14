@@ -11,6 +11,6 @@ namespace KomponenteUgovori
     public interface IPotrosac
     {
         [OperationContract]
-        double GetPotrosnjaPotrosaca(double potrosnjaPotrosaca);
+        DateTime GetPotrosnjaPotrosaca(double potrosnjaPotrosaca);
     }
 }
