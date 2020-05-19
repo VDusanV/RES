@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="IBatteryToShesCommands.cs" />
     <Compile Include="IPotrosac.cs" />
     <Compile Include="IPunjac.cs" />
+    <Compile Include="IShesToBatteryCommands.cs" />
     <Compile Include="ISolarniPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -313,5 +313,6 @@ namespace Komponente
             Console.WriteLine("-------OPERACIJA IZVRSENA--------");
             Console.ForegroundColor = ConsoleColor.White;
         }
+
     }
 }

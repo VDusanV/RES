@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 namespace KomponenteUgovori
 {
     [ServiceContract]
-    public interface IPotrosac
+    public interface IBatteryToShesCommands
     {
         [OperationContract]
-        DateTime GetPotrosnjaPotrosaca(double potrosnjaPotrosaca);
-
+        DateTime posaljiPodatke(int kapacitet, int rezim, double maxSnaga);
     }
 }
