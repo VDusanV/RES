@@ -49,6 +49,7 @@ namespace Komponente
         {
             ChannelFactory<IPunjac> factoryPanel = new ChannelFactory<IPunjac>("ImplementacijaPunjaca");
             IPunjac proxyPunjac = factoryPanel.CreateChannel();
+            Thread.Sleep(1500);
 
             while (true)
             {
@@ -59,9 +60,14 @@ namespace Komponente
                     proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
 
                 }
-                if (Data.PunjacEA.AutoNaPunjacu && Data.PunjacEA.DaLiZelimoDaSePuni)
+                else if (Data.PunjacEA.AutoNaPunjacu && Data.PunjacEA.DaLiZelimoDaSePuni)
                 {
                     proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
+                }
+                else
+                {
+                    proxyPunjac.GetUkupnaPotrosnjaPunjaca(0);
+
                 }
                 Thread.Sleep(1000);
             }

@@ -17,7 +17,7 @@ namespace Baterija
         {
             Ime = "BaterijaNaziv";
             Kapacitet = 3;
-            MaxSnaga = 50;
+            MaxSnaga = 900;
         }
 
 

@@ -9,5 +9,16 @@ namespace SHES
     public class Data
     {
         public static DateTime CentralnoVreme;
+        public static double Potrosac { get; set; } = 0;
+        public static double Punjac { get; set; } = 0;
+        public static double SolarniPanel { get; set; } = 0;
+        public static double Baterija { get; set; } = 0;
+
+        public static double IzracunajUkupnoStanje()
+        {
+            return (SolarniPanel - Potrosac - Punjac - Baterija);
+        }
+
+
     }
 }

@@ -11,8 +11,9 @@ namespace SHES
     {
         public DateTime GetPotrosnjaPotrosaca(double potrosnjaPotrosaca)
         {
-            Console.WriteLine("Ukupna potrosnja potrosaca je--------------------" + potrosnjaPotrosaca);
-
+          //  Console.WriteLine("Ukupna potrosnja potrosaca je--------------------" + potrosnjaPotrosaca);
+            
+            Data.Potrosac = potrosnjaPotrosaca;
 
             return Data.CentralnoVreme;
         }

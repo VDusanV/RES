@@ -34,10 +34,51 @@ namespace SHES
             servicePanel.Open();
             servicePunjac.Open();
 
+            Thread ispis = new Thread(Ispis);
+            ispis.Start();
+
             Console.ReadLine();
             service.Close();
             servicePanel.Close();
             servicePunjac.Close();
+        }
+
+        private static void Ispis()
+        {
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("--------" + Data.CentralnoVreme + "---------");
+                Console.WriteLine("--Trenutna potrosnja potrosaca je-------------->" + Data.Potrosac);
+                Console.WriteLine("--Trenutna potrosnja punjaca je---------------->" + Data.Punjac);
+                Console.WriteLine("--Trenutna prooizvodnja solarnih panela je----->" + Data.SolarniPanel);
+                Console.WriteLine("--Baterija potrosnja--------------------------->" + Data.Baterija);
+                Console.Write("--Ukupno stanje je ");
+                TrenutnoStanje(Data.IzracunajUkupnoStanje());
+
+                Thread.Sleep(2000);
+            }
+        }
+
+        private static void TrenutnoStanje(double d)
+        {
+            
+            
+            if (d >= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(d);
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(d);
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
         }
 
         private static void SimulacijaVremena()
@@ -50,7 +91,8 @@ namespace SHES
                     //ako crveni ConfigurationManager, dodaj u References System.Configuration
                     int i = Int32.Parse(ConfigurationManager.AppSettings["minuta"]);
                     Data.CentralnoVreme = Data.CentralnoVreme.AddMinutes(i);
-                    Console.WriteLine(Data.CentralnoVreme);
+                    
+                    
                     Thread.Sleep(1000);
                 }
                 catch
