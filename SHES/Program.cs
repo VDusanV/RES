@@ -19,12 +19,15 @@ namespace SHES
 
             Thread client = new Thread(klijent); //shes bateriji salje komande
             Thread server = new Thread(serverShes); //shes dobija informacije od baterije
+            Thread upisBaza = new Thread(bazaUpis); 
 
-            Data.CentralnoVreme = DateTime.Now;
+            Data.CentralnoVreme = new DateTime(2021, 12, 04, 0, 0, 0);
+            Data.dan = Data.CentralnoVreme.Day;
             vreme.Start();
 
             client.Start();
             server.Start();
+            upisBaza.Start();
 
             ServiceHost service = new ServiceHost(typeof(ImplementacijaPotrosaca));
             ServiceHost servicePanel = new ServiceHost(typeof(ImplementacijaSolarniPanel));
@@ -37,6 +40,37 @@ namespace SHES
             Thread ispis = new Thread(Ispis);
             ispis.Start();
 
+           
+
+            
+            //grafik
+            while (true)
+            {
+                Console.WriteLine("Unesite zeljeni datum za koji zelite analizu: ");
+                string datumUnos = Console.ReadLine();
+                string[] split = datumUnos.Split(':');
+                int dan = Int32.Parse(split[0]);
+                int mjesec = Int32.Parse(split[1]);
+                int godina = Int32.Parse(split[2]);
+
+                string trazeniDatumBaza = "";
+                trazeniDatumBaza += dan + ";" + mjesec + ";" + godina.ToString();
+
+
+                ShesProracunModel modelIzBaze = new ShesProracunModel();
+                List<ShesProracunModel> proracun = DataBaseAccess.UcitajProracun(trazeniDatumBaza);
+                foreach (ShesProracunModel md in proracun)
+                {
+                    modelIzBaze = md;
+                }
+
+                Graph graph = new Graph(datumUnos, modelIzBaze.ProizvodnjaPanela, modelIzBaze.PotrosnjaPotrosaca, modelIzBaze.EnergijaIzBaterije);//dodati Elektro kao parametar
+                graph.ShowDialog();
+            
+            }
+
+
+
             Console.ReadLine();
             service.Close();
             servicePanel.Close();
@@ -47,7 +81,7 @@ namespace SHES
         {
             while (true)
             {
-                Console.WriteLine();
+                /*Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("--------" + Data.CentralnoVreme + "---------");
                 Console.WriteLine("--Trenutna potrosnja potrosaca je-------------->" + Data.Potrosac);
@@ -55,9 +89,44 @@ namespace SHES
                 Console.WriteLine("--Trenutna prooizvodnja solarnih panela je----->" + Data.SolarniPanel);
                 Console.WriteLine("--Baterija potrosnja--------------------------->" + Data.Baterija);
                 Console.Write("--Ukupno stanje je ");
+                
                 TrenutnoStanje(Data.IzracunajUkupnoStanje());
+                */
+                Data.Proizvodnja += Data.SolarniPanel;
+                Data.Potrosnja += Data.Potrosac + Data.Punjac;
+                Data.EnergijaIzBaterije += Data.Baterija;
+                //Data.UvozIzElektroDistribucije += 
 
                 Thread.Sleep(2000);
+            }
+        }
+        private static void bazaUpis()
+        {
+            while (true)
+            {
+                if (Data.dan != Data.CentralnoVreme.Day)
+                {
+
+                    Data.dan = Data.CentralnoVreme.Day;
+
+                    DateTime tempVr = Data.CentralnoVreme; //moram upisati prosli dan u bazu
+                    tempVr = tempVr.Date.AddDays(-1);
+
+                    
+                    ShesProracunModel noviModel = new ShesProracunModel();
+                    noviModel.Datum = ""; //primarni kljuc u bazi
+                    noviModel.Datum += tempVr.Day + ";" + tempVr.Month + ";" + tempVr.Year;
+                    noviModel.EnergijaIzBaterije = Data.EnergijaIzBaterije; //ukupna energija za dan
+                    noviModel.PotrosnjaPotrosaca = Data.Potrosnja; //ukupna potrosnja za dan
+                    noviModel.ProizvodnjaPanela = Data.Proizvodnja; //ukupna proizvodnja za dan
+                    noviModel.UvozIzElektrodistribucije = 300; //ukupan uvoz iz elektrod Data.UvozIzElektrodistribucije
+                    DataBaseAccess.SacuvajProracun(noviModel);
+
+                    //osvjezi vrijednosti za novi dan
+                    Data.EnergijaIzBaterije = 0;
+                    Data.Potrosnja = 0;
+                    Data.Proizvodnja = 0;
+                }
             }
         }
 
