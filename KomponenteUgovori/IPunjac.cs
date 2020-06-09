@@ -11,7 +11,7 @@ namespace KomponenteUgovori
     public interface IPunjac
     {
         [OperationContract]
-        void GetUkupnaPotrosnjaPunjaca(int ukupnaSnaga);
+        void GetUkupnaPotrosnjaPunjaca(double ukupnaSnaga);
 
     }
 }

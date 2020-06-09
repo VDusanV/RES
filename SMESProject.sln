@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KomponenteUgovori", "Kompon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baterija", "Baterija\Baterija.csproj", "{3B323397-61C3-41A6-9AD4-EC8F585C6CF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElektroDistribucija", "ElektroDistribucija\ElektroDistribucija.csproj", "{65CAE151-FBB0-4249-896E-CCDD33AC8658}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3B323397-61C3-41A6-9AD4-EC8F585C6CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B323397-61C3-41A6-9AD4-EC8F585C6CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B323397-61C3-41A6-9AD4-EC8F585C6CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65CAE151-FBB0-4249-896E-CCDD33AC8658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65CAE151-FBB0-4249-896E-CCDD33AC8658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65CAE151-FBB0-4249-896E-CCDD33AC8658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65CAE151-FBB0-4249-896E-CCDD33AC8658}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,14 +20,17 @@ namespace SHES
             Thread client = new Thread(klijent); //shes bateriji salje komande
             Thread server = new Thread(serverShes); //shes dobija informacije od baterije
             Thread upisBaza = new Thread(bazaUpis); 
+            Thread clientElekDist = new Thread(elektrodistribucija); 
 
-            Data.CentralnoVreme = new DateTime(2021, 12, 04, 0, 0, 0);
+            Data.CentralnoVreme = new DateTime(2017, 12, 04, 0, 0, 0);
             Data.dan = Data.CentralnoVreme.Day;
             vreme.Start();
+
 
             client.Start();
             server.Start();
             upisBaza.Start();
+            clientElekDist.Start();
 
             ServiceHost service = new ServiceHost(typeof(ImplementacijaPotrosaca));
             ServiceHost servicePanel = new ServiceHost(typeof(ImplementacijaSolarniPanel));
@@ -37,8 +40,8 @@ namespace SHES
             servicePanel.Open();
             servicePunjac.Open();
 
-            Thread ispis = new Thread(Ispis);
-            ispis.Start();
+          //  Thread ispis = new Thread(Ispis);
+           // ispis.Start();
 
            
 
@@ -46,7 +49,8 @@ namespace SHES
             //grafik
             while (true)
             {
-                Console.WriteLine("Unesite zeljeni datum za koji zelite analizu: ");
+                Console.WriteLine("Unesite zeljeni datum za koji zelite analizu(dan:mesec:godina): ");
+                
                 string datumUnos = Console.ReadLine();
                 string[] split = datumUnos.Split(':');
                 int dan = Int32.Parse(split[0]);
@@ -71,10 +75,25 @@ namespace SHES
 
 
 
-            Console.ReadLine();
+           // Console.ReadLine();
             service.Close();
             servicePanel.Close();
             servicePunjac.Close();
+        }
+
+        private static void elektrodistribucija()
+        {
+            ChannelFactory<IElekDistribucija> factoryPanel = new ChannelFactory<IElekDistribucija>("ImplementacijaElekDis");
+            IElekDistribucija proxyElekDis = factoryPanel.CreateChannel();
+            Thread.Sleep(500);
+
+            while (true)
+            {
+                double cena= proxyElekDis.Izracunaj(Data.IzracunajUkupnoStanje());
+                Data.CenaUvozIzElektro= cena;
+                Thread.Sleep(1000);
+
+            }
         }
 
         private static void Ispis()
@@ -177,8 +196,8 @@ namespace SHES
 
             ServiceHost service = new ServiceHost(typeof(BatteryToShesCommands));
             service.Open();
-            Console.ReadKey();
-            service.Close();
+         //   Console.ReadKey();
+          //  service.Close();
         }
 
         private static void klijent()

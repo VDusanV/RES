@@ -9,7 +9,7 @@ namespace SHES
 {
     class ImplementacijaPunjaca : IPunjac
     {
-        public void GetUkupnaPotrosnjaPunjaca(int ukupnaSnaga)
+        public void GetUkupnaPotrosnjaPunjaca(double ukupnaSnaga)
         {
           //  Console.WriteLine("Ukupna potrosnja Punjaca je----------------------" + ukupnaSnaga);
             Data.Punjac = ukupnaSnaga;

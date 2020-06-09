@@ -18,11 +18,11 @@ namespace SHES
         public static double Proizvodnja { get; set; } = 0;
         public static double Potrosnja { get; set; } = 0;
         public static double EnergijaIzBaterije { get; set; } = 0;
-        public static double UvozIzElektro { get; set; } = 0;
+        public static double CenaUvozIzElektro { get; set; } = 0;
 
         public static double IzracunajUkupnoStanje()
         {
-            return (SolarniPanel - Potrosac - Punjac - Baterija);
+            return (SolarniPanel - Potrosac - Punjac + Baterija);
         }
 
 
