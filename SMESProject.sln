@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baterija", "Baterija\Bateri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElektroDistribucija", "ElektroDistribucija\ElektroDistribucija.csproj", "{65CAE151-FBB0-4249-896E-CCDD33AC8658}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "testovi", "testovi", "{B2FB9143-8946-47B6-BAD5-8B54A224FE8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KomponenteTest", "KomponenteTest\KomponenteTest.csproj", "{9719B7AD-3996-4584-94D0-7FB0F467D701}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,16 @@ Global
 		{65CAE151-FBB0-4249-896E-CCDD33AC8658}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65CAE151-FBB0-4249-896E-CCDD33AC8658}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65CAE151-FBB0-4249-896E-CCDD33AC8658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9719B7AD-3996-4584-94D0-7FB0F467D701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9719B7AD-3996-4584-94D0-7FB0F467D701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9719B7AD-3996-4584-94D0-7FB0F467D701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9719B7AD-3996-4584-94D0-7FB0F467D701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9719B7AD-3996-4584-94D0-7FB0F467D701} = {B2FB9143-8946-47B6-BAD5-8B54A224FE8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C79C9F36-A309-4024-945B-44A67EA4447D}

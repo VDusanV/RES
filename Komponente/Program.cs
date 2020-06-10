@@ -153,7 +153,7 @@ namespace Komponente
                                 Console.WriteLine("Unesite maksimalnu snagu solarnog panela: ");
                                 try
                                 {
-                                    sp.MaxSnaga = Int32.Parse(Console.ReadLine());
+                                    sp.MaxSnaga = double.Parse(Console.ReadLine());
                                     sp.Ime = naziv;
                                 }
                                 catch
