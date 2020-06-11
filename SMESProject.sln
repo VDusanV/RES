@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KomponenteTest", "Komponent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElektroDistribucijaTest", "ElektroDistribucijaTest\ElektroDistribucijaTest.csproj", "{96BD944E-C167-4FBF-9C76-5362E93DC9EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaterijaTest", "BaterijaTest\BaterijaTest.csproj", "{0D006BA8-FACD-4AAC-8D66-8C8E41FB2AFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{96BD944E-C167-4FBF-9C76-5362E93DC9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96BD944E-C167-4FBF-9C76-5362E93DC9EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96BD944E-C167-4FBF-9C76-5362E93DC9EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D006BA8-FACD-4AAC-8D66-8C8E41FB2AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D006BA8-FACD-4AAC-8D66-8C8E41FB2AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D006BA8-FACD-4AAC-8D66-8C8E41FB2AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D006BA8-FACD-4AAC-8D66-8C8E41FB2AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9719B7AD-3996-4584-94D0-7FB0F467D701} = {B2FB9143-8946-47B6-BAD5-8B54A224FE8C}
 		{96BD944E-C167-4FBF-9C76-5362E93DC9EE} = {B2FB9143-8946-47B6-BAD5-8B54A224FE8C}
+		{0D006BA8-FACD-4AAC-8D66-8C8E41FB2AFE} = {B2FB9143-8946-47B6-BAD5-8B54A224FE8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C79C9F36-A309-4024-945B-44A67EA4447D}

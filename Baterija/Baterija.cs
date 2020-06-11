@@ -12,7 +12,9 @@ namespace Baterija
         public int Kapacitet { get; set; } //kapacitet u satima
         public double MaxSnaga { get; set; }
         public int Rezim { get; set; }    //generator, potrosac ili je iskljucena                                
-                                                                           
+
+        
+
         public Baterija()
         {
             Ime = "BaterijaNaziv";

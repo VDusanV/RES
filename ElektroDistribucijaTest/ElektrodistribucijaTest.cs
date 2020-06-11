@@ -11,6 +11,15 @@ namespace ElektroDistribucijaTest
     [TestFixture]
     public class ElektrodistribucijaTest
     {
+        private ElektroDistribucija.Elektrodistribucija elektrodistribucija;
+
+        [SetUp]
+        public void Setup()
+        {
+            elektrodistribucija = new Elektrodistribucija();
+        }
+
+
         [Test]
         [TestCase(200.0, 300.0)]
         [TestCase(400.0, 500.0)]
@@ -19,6 +28,9 @@ namespace ElektroDistribucijaTest
             Elektrodistribucija e = new Elektrodistribucija(a, b);
             Assert.AreEqual(e.CenaPoKilovatcasu, b);
             Assert.AreEqual(e.SnagaRazmene, a);
+
+            //izracunajCenuTest
+            Assert.IsNotNull(e.IzracunajCenu());
 
         }
         [Test]
@@ -46,8 +58,13 @@ namespace ElektroDistribucijaTest
             });
         }
 
+        [Test]
+        public void ElektrodistribucijaKonstruktor()
+        {
+            Assert.AreNotEqual(elektrodistribucija, null);
+        }
 
-
+        
 
     }
 }

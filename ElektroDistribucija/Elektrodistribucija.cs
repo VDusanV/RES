@@ -11,11 +11,14 @@ namespace ElektroDistribucija
         public double SnagaRazmene { get; set; }
         public double CenaPoKilovatcasu { get; set; }
 
+        public Elektrodistribucija() { }
+
         public Elektrodistribucija(double snaga, double cena)
         {
             if (snaga < 0 || cena < 0)
             {
-                throw new Exception();
+                throw new ArgumentException("Losi parametri");
+
             }
             SnagaRazmene = snaga;
             CenaPoKilovatcasu = cena;
