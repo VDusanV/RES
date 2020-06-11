@@ -26,7 +26,7 @@ namespace SHES
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Proracun (Datum, ProizvodnjaPanela, EnergijaIzBaterije, PotrosnjaPotrosaca, UvozIzElektrodistribucije) values (@Datum, @ProizvodnjaPanela, @EnergijaIzBaterije, @PotrosnjaPotrosaca, @UvozIzElektrodistribucije)", proracun);
+                cnn.Execute("insert into Proracun (Datum, ProizvodnjaPanela, EnergijaIzBaterije, PotrosnjaPotrosaca, UvozIzElektrodistribucije, UkupnaCijena) values (@Datum, @ProizvodnjaPanela, @EnergijaIzBaterije, @PotrosnjaPotrosaca, @UvozIzElektrodistribucije, @UkupnaCijena)", proracun);
             }
         }
 

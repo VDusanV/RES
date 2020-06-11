@@ -13,6 +13,8 @@ namespace SHES
         public double EnergijaIzBaterije { get; set; }
         public double PotrosnjaPotrosaca { get; set; }
         public double UvozIzElektrodistribucije { get; set; }
+        //
+        public double UkupnaCijena { get; set; }
 
 
     }

@@ -19,6 +19,8 @@ namespace SHES
         public static double Potrosnja { get; set; } = 0;
         public static double EnergijaIzBaterije { get; set; } = 0;
         public static double CenaUvozIzElektro { get; set; } = 0;
+        public static double UvozIzElektrodistribucijePoDanu { get; set; } = 0;
+        public static double UkupnaCijenaPoDanu { get; set; } = 0;
 
         public static double IzracunajUkupnoStanje()
         {

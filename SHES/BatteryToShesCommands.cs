@@ -1,6 +1,7 @@
 ﻿using KomponenteUgovori;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,11 @@ namespace SHES
           //  Console.WriteLine("------ Baterija ------");
           //  Console.WriteLine("kapacitet: {0}", kapacitet);
             string rezimStr = "";
+            maxSnaga *= Double.Parse(ConfigurationManager.AppSettings["minuta"]) / 60;
             if (rezim == 1) //ako je rezim 1 onda generator
             {
                 rezimStr = "generator";
-                Data.Baterija = maxSnaga;
+                Data.Baterija = maxSnaga ;
             }
             if (rezim == 2)     // 2 -> potrosac
             {

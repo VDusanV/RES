@@ -22,12 +22,12 @@ namespace SHES
             base.Dispose(disposing);
         }
 
-        public Graph(string datum, double proizvodnja, double potrosnja, double energija, double uvozIzElektrodistribucije = 300) //promjeniti uvoz kad implementiram elektrodistribuciju
+        public Graph(double cijena, string datum, double proizvodnja, double potrosnja, double energija, double uvozIzElektrodistribucije) //promjeniti uvoz kad implementiram elektrodistribuciju
         {
             InitializeComponent();
 
 
-            this.chart1.Series["Proizvodnja"].Points.AddXY("Analiza za " + datum, proizvodnja);
+            this.chart1.Series["Proizvodnja"].Points.AddXY("Analiza za " + datum + ". Ukupana cena: " + cijena + "$", proizvodnja);
             this.chart1.Series["Potrosnja"].Points.AddXY("Potrosnja", potrosnja);
             this.chart1.Series["EnergijaIzBaterije"].Points.AddXY("Energija iz baterije", energija);
             this.chart1.Series["UvozIzElektro"].Points.AddXY("Uvoz iz elektrodistribucije", uvozIzElektrodistribucije); 

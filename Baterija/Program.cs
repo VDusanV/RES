@@ -46,7 +46,7 @@ namespace Baterija
                     IBatteryToShesCommands proxy = factory.CreateChannel();
 
                     BatteryData.vrijeme = proxy.posaljiPodatke(BatteryData.baterija.Kapacitet, BatteryData.baterija.Rezim, BatteryData.baterija.MaxSnaga); //dodati kapacitet i rezim
-                    //Console.WriteLine(BatteryData.vrijeme);
+                    Console.WriteLine("Trenutno vrijeme: " + BatteryData.vrijeme);
                     Thread.Sleep(1000);
 
                 }

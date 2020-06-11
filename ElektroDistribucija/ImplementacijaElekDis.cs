@@ -9,7 +9,7 @@ namespace ElektroDistribucija
 {
     public class ImplementacijaElekDis : IElekDistribucija
     {
-        private Elektrodistribucija e = new Elektrodistribucija(0, 200) { };
+        private Elektrodistribucija e = new Elektrodistribucija(0, 0.5) { };
         public double Izracunaj(double snaga)
         {
             e.SnagaRazmene = snaga;

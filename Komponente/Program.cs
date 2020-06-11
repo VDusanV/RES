@@ -19,7 +19,7 @@ namespace Komponente
             SolarniPanel sp1 = new SolarniPanel()
             {
                 Ime = "prvi",
-                MaxSnaga = 50
+                MaxSnaga = 1000
             };
             //Default-ni potrosac
             Potrosac p1 = new Potrosac()
@@ -57,11 +57,14 @@ namespace Komponente
                 if(Data.vreme.Hour>=Data.PunjacEA.VremePunjenjaOd.Hour 
                     || Data.vreme.Hour <= Data.PunjacEA.VremePunjenjaDo.Hour)
                 {
+                    Data.PunjacEA.NapunjenostBaterije++;
                     proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
 
                 }
                 else if (Data.PunjacEA.AutoNaPunjacu && Data.PunjacEA.DaLiZelimoDaSePuni)
                 {
+                    Data.PunjacEA.NapunjenostBaterije++;
+
                     proxyPunjac.GetUkupnaPotrosnjaPunjaca(Data.PunjacEA.MaxSnagaBaterije);
                 }
                 else

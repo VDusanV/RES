@@ -22,7 +22,7 @@ namespace SHES
             Thread upisBaza = new Thread(bazaUpis); 
             Thread clientElekDist = new Thread(elektrodistribucija); 
 
-            Data.CentralnoVreme = new DateTime(2017, 12, 04, 0, 0, 0);
+            Data.CentralnoVreme = new DateTime(2015, 12, 04, 0, 0, 0);
             Data.dan = Data.CentralnoVreme.Day;
             vreme.Start();
 
@@ -40,37 +40,82 @@ namespace SHES
             servicePanel.Open();
             servicePunjac.Open();
 
-          //  Thread ispis = new Thread(Ispis);
-           // ispis.Start();
+            Thread ispis = new Thread(Ispis);
+            ispis.Start();
 
-           
 
-            
+
+            int opcija = 0;
             //grafik
             while (true)
             {
-                Console.WriteLine("Unesite zeljeni datum za koji zelite analizu(dan:mesec:godina): ");
-                
-                string datumUnos = Console.ReadLine();
-                string[] split = datumUnos.Split(':');
-                int dan = Int32.Parse(split[0]);
-                int mjesec = Int32.Parse(split[1]);
-                int godina = Int32.Parse(split[2]);
+                Console.WriteLine("---------------------");
+                Console.WriteLine("  Unesite opciju");
+                Console.WriteLine("1 ---- trenutno stanje");
+                Console.WriteLine("2 ---- potrosnja odrdjenog dana");
+                Console.WriteLine("---------------------");
 
-                string trazeniDatumBaza = "";
-                trazeniDatumBaza += dan + ";" + mjesec + ";" + godina.ToString();
-
-
-                ShesProracunModel modelIzBaze = new ShesProracunModel();
-                List<ShesProracunModel> proracun = DataBaseAccess.UcitajProracun(trazeniDatumBaza);
-                foreach (ShesProracunModel md in proracun)
+                try
                 {
-                    modelIzBaze = md;
+                    opcija = Int32.Parse(Console.ReadLine());
                 }
+                catch
+                {
+                    Console.WriteLine("Pogresno uneta opcija");
+                    continue;
 
-                Graph graph = new Graph(datumUnos, modelIzBaze.ProizvodnjaPanela, modelIzBaze.PotrosnjaPotrosaca, modelIzBaze.EnergijaIzBaterije);//dodati Elektro kao parametar
-                graph.ShowDialog();
-            
+                }
+                switch (opcija)
+                {
+                    case 1:
+                        Console.WriteLine();
+                        Console.WriteLine("--------" + Data.CentralnoVreme + "---------");
+                        Console.WriteLine("--Trenutna potrosnja potrosaca je-------------->" + Data.Potrosac);
+                        Console.WriteLine("--Trenutna potrosnja punjaca je---------------->" + Data.Punjac);
+                        Console.WriteLine("--Trenutna prooizvodnja solarnih panela je----->" + Data.SolarniPanel);
+                        Console.WriteLine("--Baterija potrosnja--------------------------->" + Data.Baterija);
+                        Console.Write("--Ukupno stanje je (kWh) ");
+
+                        TrenutnoStanje(Data.IzracunajUkupnoStanje());
+
+                        break;
+
+                    case 2:
+                        try
+                        {
+                            Console.WriteLine("Unesite zeljeni datum za koji zelite analizu(dan:mesec:godina): ");
+
+                            string datumUnos = Console.ReadLine();
+                            string[] split = datumUnos.Split(':');
+                            int dan = Int32.Parse(split[0]);
+                            int mjesec = Int32.Parse(split[1]);
+                            int godina = Int32.Parse(split[2]);
+
+                            string trazeniDatumBaza = "";
+                            trazeniDatumBaza += dan + ";" + mjesec + ";" + godina.ToString();
+
+
+                            ShesProracunModel modelIzBaze = new ShesProracunModel();
+                            List<ShesProracunModel> proracun = DataBaseAccess.UcitajProracun(trazeniDatumBaza);
+                            foreach (ShesProracunModel md in proracun)
+                            {
+                                modelIzBaze = md;
+                            }
+
+                            Graph graph = new Graph(modelIzBaze.UkupnaCijena, datumUnos, modelIzBaze.ProizvodnjaPanela, modelIzBaze.PotrosnjaPotrosaca, modelIzBaze.EnergijaIzBaterije, modelIzBaze.UvozIzElektrodistribucije);//dodati Elektro kao parametar
+                            graph.ShowDialog();
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Pogresno unet format datuma.");
+                            
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+                
             }
 
 
@@ -89,8 +134,15 @@ namespace SHES
 
             while (true)
             {
-                double cena= proxyElekDis.Izracunaj(Data.IzracunajUkupnoStanje());
+                double pomocna = Data.IzracunajUkupnoStanje();
+                double cena= proxyElekDis.Izracunaj(pomocna);
+               /* if (pomocna < 0)
+                {
+                    Data.UvozIzElektrodistribucijePoDanu += pomocna;
+                }*/
                 Data.CenaUvozIzElektro= cena;
+                Data.UkupnaCijenaPoDanu += Data.CenaUvozIzElektro;
+                
                 Thread.Sleep(1000);
 
             }
@@ -114,9 +166,13 @@ namespace SHES
                 Data.Proizvodnja += Data.SolarniPanel;
                 Data.Potrosnja += Data.Potrosac + Data.Punjac;
                 Data.EnergijaIzBaterije += Data.Baterija;
-                //Data.UvozIzElektroDistribucije += 
+                if(Data.IzracunajUkupnoStanje() < 0)
+                {
+                    Data.UvozIzElektrodistribucijePoDanu += Data.IzracunajUkupnoStanje();
+                }
+                
 
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
             }
         }
         private static void bazaUpis()
@@ -138,13 +194,15 @@ namespace SHES
                     noviModel.EnergijaIzBaterije = Data.EnergijaIzBaterije; //ukupna energija za dan
                     noviModel.PotrosnjaPotrosaca = Data.Potrosnja; //ukupna potrosnja za dan
                     noviModel.ProizvodnjaPanela = Data.Proizvodnja; //ukupna proizvodnja za dan
-                    noviModel.UvozIzElektrodistribucije = 300; //ukupan uvoz iz elektrod Data.UvozIzElektrodistribucije
+                    noviModel.UvozIzElektrodistribucije = Data.UvozIzElektrodistribucijePoDanu*(-1); //ukupan uvoz iz elektrod Data.UvozIzElektrodistribucije
+                    noviModel.UkupnaCijena = Data.UkupnaCijenaPoDanu; //ukupna cijena po danu u bazu upis
                     DataBaseAccess.SacuvajProracun(noviModel);
 
                     //osvjezi vrijednosti za novi dan
                     Data.EnergijaIzBaterije = 0;
                     Data.Potrosnja = 0;
                     Data.Proizvodnja = 0;
+                    Data.UvozIzElektrodistribucijePoDanu = 0;
                 }
             }
         }
